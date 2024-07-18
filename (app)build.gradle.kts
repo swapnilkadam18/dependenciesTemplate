@@ -6,27 +6,17 @@ plugins {
 }
 
 android {
-    namespace = "com.swapnil.newsapp"
+    namespace = "com.swapnil.newstrial"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.swapnil.newsapp"
+        applicationId = "com.swapnil.newstrial"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildFeatures {
-        compose = true
-        buildConfig = true
-        viewBinding = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.9"
     }
 
     buildTypes {
@@ -38,19 +28,22 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "17"
-    }
-    kapt {
-        correctErrorTypes = true
+        jvmTarget = "1.8"
     }
 }
 
 dependencies {
+
     // Core
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
@@ -85,7 +78,7 @@ dependencies {
 
     // Room
     implementation(libs.room.runtime)
-    testImplementation("junit:junit:4.12")
+    implementation(libs.androidx.junit.ktx)
     kapt(libs.room.compiler)
     implementation(libs.room.ktx)
     implementation(libs.room.paging)
@@ -93,6 +86,7 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+    kaptTest(libs.hilt.compiler)
 
     // glide
     implementation(libs.glide)
@@ -104,9 +98,12 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.inline)
+    testImplementation(libs.mockito.kotlin)
     testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.espresso.core)
+    testImplementation(libs.hilt.android.test)
+    kaptAndroidTest(libs.kapt.android.test)
     androidTestImplementation(libs.compose.ui.test.junit4)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
